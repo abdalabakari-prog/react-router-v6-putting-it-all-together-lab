@@ -1,40 +1,44 @@
+import React, { useState, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
-import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import NavBar from '../components/NavBar'
-
-const DirectorContainer = () => {
-  const [directors, setDirectors] = useState([])
+function DirectorContainer() {
+  const [directors, setDirectors] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:4000/directors")
-      .then(r => {
-        if (!r.ok) { throw new Error("failed to fetch directors") }
-        return r.json()
-      })
-      .then(setDirectors)
-      .catch(console.log)
-  }, [])
+    fetch('http://localhost:3000/directors')
+      .then(res => res.json())
+      .then(data => setDirectors(data));
+  }, []);
 
   const addDirector = (newDirector) => {
-    setDirectors([...directors, newDirector])
-  }
+    fetch('http://localhost:3000/directors', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newDirector),
+    })
+      .then(res => res.json())
+      .then(data => {
+        setDirectors([...directors, data]);
+        navigate(`/directors/${data.id}`);
+      });
+  };
 
   const updateDirector = (updatedDirector) => {
     setDirectors(directors.map(d => 
       d.id === updatedDirector.id ? updatedDirector : d
-    ))
-  }
+    ));
+  };
 
   return (
-    <>
+    <div>
       <NavBar />
-      <main>
-        <h1>Welcome to the Director's Directory!</h1>
-        <Outlet context={{ directors, addDirector, updateDirector }} />
-      </main>
-    </>
-  )
+      <Outlet context={{ directors, addDirector, updateDirector }} />
+    </div>
+  );
 }
 
-export default DirectorContainer
+export default DirectorContainer;

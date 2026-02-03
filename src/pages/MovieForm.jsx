@@ -20,7 +20,8 @@ function MovieForm() {
 
   return (
     <div>
-      <h3>Add New Movie to {director.name}</h3>
+      <h2>Add New Movie</h2>
+
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Movie Title:</label>

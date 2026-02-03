@@ -1,15 +1,15 @@
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import DirectorContainer from './pages/DirectorContainer';
+import DirectorList from './pages/DirectorList';
+import DirectorForm from './pages/DirectorForm';
+import DirectorCard from './pages/DirectorCard';
+import MovieForm from './pages/MovieForm';
+import MovieCard from './pages/MovieCard';
 
-import { Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import DirectorContainer from "./pages/DirectorContainer"
-import DirectorList from "./pages/DirectorList"
-import DirectorForm from "./pages/DirectorForm"
-import DirectorCard from "./pages/DirectorCard"
-import MovieForm from "./pages/MovieForm"
-import MovieCard from "./pages/MovieCard"
-
-const App = () => {
+function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -23,7 +23,7 @@ const App = () => {
         </Route>
       </Route>
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

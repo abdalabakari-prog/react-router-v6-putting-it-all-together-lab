@@ -5,7 +5,7 @@ function About() {
   return (
     <div>
       <NavBar />
-      <h1>About</h1>
+     <h1>About the Movie Directory</h1>
       <p>This is a movie directory application built with React Router.</p>
     </div>
   );
